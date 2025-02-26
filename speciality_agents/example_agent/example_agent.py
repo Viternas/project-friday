@@ -73,14 +73,14 @@ def create_example_agent():
         def example_function(self, checkpoint_uuid: str, step_uuid: str, previous_step_uuid: str, function_arguments: dict):
             @self.agent.memory.add_to_memory_decorator()
             @self.agent.memory.function_normalizer.normalize()
-            @self.agent.function_type_label(FunctionType.REASONING.value)
+            @self.agent.memory.function_type_label(FunctionType.DATA_PROCESSING.value)
             def _example_function_processing(*args, **kwargs):
-                self.agent.thinking.example_thinking()
+                #self.agent.thinking.example_thinking()
                 return 5
 
             @self.agent.memory.add_to_memory_decorator()
             @self.agent.memory.function_normalizer.normalize()
-            @self.agent.function_type_label(FunctionType.DATA_PROCESSING.value)
+            @self.agent.memory.function_type_label(FunctionType.DATA_PROCESSING.value)
             def _example_function_thinking(*args, **kwargs):
                 return 50
 
@@ -108,8 +108,7 @@ def create_example_agent():
 
 
 
-    return ExampleAgent()
-
+    return ExampleAgent
 
 if __name__ == '__main__':
     run = create_example_agent()

@@ -168,7 +168,6 @@ class FunctionOutputNormalizer:
 
                 try:
                     raw_output = func(*args, **kwargs)
-                    print(raw_output)
                     output, cost = cls._extract_cost(raw_output)
 
                     if hasattr(func, 'function_type_label'):

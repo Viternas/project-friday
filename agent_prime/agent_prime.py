@@ -1,4 +1,6 @@
 import os
+from uuid import uuid4
+
 from build_utils.encode_config_json import JsonFormatter
 from loguru import logger
 from openai.resources import Models
@@ -10,9 +12,6 @@ from thinking.thinking import TaskMaster
 from agent_registry import map_agent
 from agent_memory.agent_internal_memory import AgentMemory
 
-def setup_first_run():
-    ec = JsonFormatter(package_dir=os.path.dirname(__file__), config_file='unencoded_config_main.json', encode=True)
-    cc = CreateConfigClass(package_dir=os.path.dirname(__file__), config_file_name='config_main_encoded.json').create_config_class()
 
 class AgentPrime:
     _memory_initialized = False
@@ -179,9 +178,6 @@ class AgentPrime:
                     self.generate_checkpoints()
                 self.initialise_memory_system()
 
-                self.initialise_agent_polymorphism()
-
-
     def run_example_agent(self):
         test_obj = {
             'checkpoint_uuid': '97e35266-3510-44f2-8d52-bc110da4a0f2',
@@ -193,11 +189,10 @@ class AgentPrime:
         checkpoint_uuid = list(self.memory.graph_memory.graph.nodes)
 
         agent_class = map_agent('EXAMPLE')
-        print(agent_class)
-        handler = agent_class()
-        handler = handler(self)
+        handler = agent_class()(self)
         handler.example_function(checkpoint_uuid=checkpoint_uuid[0], step_uuid=str(uuid4()),
                               previous_step_uuid=checkpoint_uuid[0], function_arguments={})
+        self.memory.graph_memory.visualise_plt()
 
 
     def test(self):
@@ -208,8 +203,7 @@ class AgentPrime:
 
 
 if __name__ =='__main__':
-    logger.remove()
-
+    #logger.remove()
     run = AgentPrime()
     run.run()
     run.run_example_agent()

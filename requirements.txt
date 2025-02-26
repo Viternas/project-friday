@@ -11,3 +11,7 @@ networkx~=3.4.2
 matplotlib~=3.10.0
 project_utils~=0.1.0
 utils~=0.1.0
+requests
+ollama
+faiss-cpu
+python-docx

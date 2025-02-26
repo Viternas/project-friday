@@ -31,6 +31,19 @@ class AgentMemory:
         logger.debug(f"AgentMemory initialized with work_package_uuid: {work_package_uuid}, task_uuid: {task_uuid}")
         return
 
+    @staticmethod
+    def function_type_label(label: FunctionType):
+        """
+        A simple decorator that attaches a 'function_label' attribute
+        to the decorated function.
+        """
+
+        def decorator(func):
+            func.function_type_label = label  # Attach the label as an attribute
+            return func
+
+        return decorator
+
     def map_checkpoint_to_dataclass(self):
         logger.info("Mapping checkpoints to dataclass")
         try:
@@ -135,7 +148,6 @@ class AgentMemory:
                 step_uuid = kwargs.get('step_uuid')
 
                 output = handler(*args, **kwargs)
-                print(output)
 
                 if isinstance(output, FunctionExecutionOutput):
                     if checkpoint_uuid:
