@@ -13,6 +13,7 @@ Agent Prime is a comprehensive, enterprise-grade framework for building intellig
 
 ## 📋 Prerequisites
 
+- Projects_utils -> https://github.com/Viternas/projects-utils
 - Python 3.8+
 - PostgreSQL database
 - FAISS for vector operations
@@ -26,6 +27,10 @@ cd agent-prime
 
 # Install dependencies
 pip install -e .
+
+# Clone the utisl lib
+git clone https://github.com/Viternas/projects-utils
+pip install ./projects_utils
 
 # Set up configuration
 cp config_template.json unencoded_config_main.json
