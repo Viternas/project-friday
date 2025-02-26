@@ -68,16 +68,7 @@ Agent Structure Overview
 The ExampleAgent follows a structured pattern: 
 python
  
- 
-1
-2
-3
-4
-5
-6
-⌄
-⌄
-⌄
+```bazaar
 def create_example_agent():
     class ExampleAgent:
         def __init__(self, data=None):
@@ -85,28 +76,16 @@ def create_example_agent():
         # Methods...
     return ExampleAgent
  
+```
+
  
 Key Components 
 1. Function Mapping 
 
 Agents provide function maps to expose available operations: 
 python
- 
- 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-⌄
-⌄
-⌄
-⌄
+
+```python
 def _map_function(self):
     return {
         'EXAMPLE_FUNCTION': self.example_function,
@@ -117,7 +96,8 @@ def _map_arguments():
     return {
         'EXAMPLE_FUNCTION': 'example_function_basemodel',
     }
- 
+```
+
  
 2. Function Execution 
 
@@ -125,32 +105,24 @@ The _run_function method handles executing mapped functions:
 python
  
  
-1
-2
-⌄
+```python
 def _run_function(self, handler, args_dict, context):
     return handler(**args_dict)
- 
+```
+
  
 3. Memory-Augmented Functions 
 
 Functions use decorators for memory tracking and normalization: 
 python
- 
- 
-1
-2
-3
-4
-5
-⌄
+```python
 @self.agent.memory.add_to_memory_decorator()
 @self.agent.memory.function_normalizer.normalize()
 @self.agent.memory.function_type_label(FunctionType.DATA_PROCESSING.value)
 def _example_function_processing(*args, **kwargs):
     return 5
- 
- 
+```
+
 
 These decorators: 
 
@@ -172,35 +144,7 @@ Functions can be categorized with FunctionType enum:
 
 Complex operations can be split into multiple steps: 
 python
- 
- 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-⌄
-⌄
-⌄
-⌄
+```python
 def example_function(self, checkpoint_uuid, step_uuid, previous_step_uuid, function_arguments):
     # Step 1: Processing
     @decorators...
@@ -225,6 +169,8 @@ def example_function(self, checkpoint_uuid, step_uuid, previous_step_uuid, funct
             function_arguments=function_arguments
         )
  
+```
+
  
 Core Agent Functions 
 Single Function Call 
@@ -232,23 +178,7 @@ Single Function Call
 Handles executing single function calls: 
 python
  
- 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-⌄
-⌄
+```python
 def single_function_call(self, checkpoint_uuid, step_uuid, previous_step_uuid, function_arguments):
     @decorators...
     def _single_function_call(*args, **kwargs):
@@ -263,24 +193,16 @@ def single_function_call(self, checkpoint_uuid, step_uuid, previous_step_uuid, f
             replacement_items=[previous_function, previous_function_output, task]
         )
         return single_function_call, cost
+```
+
  
  
 Arguments Builder 
 
 Prepares arguments for function execution: 
 python
- 
- 
-1
-2
-3
-4
-5
-6
-7
-8
-⌄
-⌄
+
+```python
 def arguments_for_single_function_call(self, checkpoint_uuid, step_uuid, previous_step_uuid, function_arguments):
     @decorators...
     def _arguments_for_single_function_call(*args, **kwargs):
@@ -289,7 +211,7 @@ def arguments_for_single_function_call(self, checkpoint_uuid, step_uuid, previou
             replacement_items=[previous_function, previous_function_output, task]
         )
         return map_to_args, cost
- 
+ ```
  
 Creating Your Own Agent 
 
