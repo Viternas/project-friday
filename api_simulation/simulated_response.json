@@ -1,0 +1,51 @@
+{
+    "current_context": {
+      "forced_context": "None",
+      "meta_main_objective": {
+        "task_meta_description": "This task requires creating a simple to-do list application using HTML, CSS, and JavaScript.",
+        "task_meta_main_objective": "Build a functional to-do list web application that allows adding, completing, and deleting tasks.",
+        "task_meta_name": "Create Basic To-Do List Web Application"
+      },
+      "priority": 2,
+      "status": {
+        "agent": "IN_PROGRESS",
+        "owner": "ASSIGNED"
+      },
+      "task_action_type_reason": "The task involves writing HTML structure for the to-do list interface.",
+      "task_complexity": "LOW",
+      "task_name": "Create HTML Structure",
+      "task_relevant_context": "The application needs a clean, user-friendly interface with input field, add button, and task display area.",
+      "task_type": "EXAMPLE"
+    },
+    "execution_context": {
+      "current_group": "a47c9d13-f85e-42b3-9c72-e01d8c641952",
+      "next_group": null,
+      "previous_group": null
+    },
+    "holistic_context": {
+      "group_tasks": [
+        {
+          "task_name": "Create CSS Styling",
+          "task_action_type_reason": "The task involves styling the HTML elements to create a visually appealing interface."
+        },
+        {
+          "task_name": "Implement JavaScript Functionality",
+          "task_action_type_reason": "The task involves adding interactive functionality for managing tasks."
+        }
+      ],
+      "parent_tasks": []
+    },
+    "linear_context": {
+      "predecessors": [],
+      "successors": [
+        {
+          "task_action_type_reason": "The task involves styling the HTML elements with CSS.",
+          "task_name": "Create CSS Styling"
+        },
+        {
+          "task_action_type_reason": "The task involves implementing JavaScript functionality for managing tasks.",
+          "task_name": "Implement JavaScript Functionality"
+        }
+      ]
+    }
+}

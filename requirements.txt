@@ -1,0 +1,13 @@
+loguru~=0.7.3
+setuptools~=75.8.0
+pydantic~=2.10.6
+openai~=1.63.2
+cryptography~=44.0.1
+passlib~=1.7.4
+SQLAlchemy~=2.0.38
+pathlib~=1.0.1
+numpy~=2.2.3
+networkx~=3.4.2
+matplotlib~=3.10.0
+project_utils~=0.1.0
+utils~=0.1.0

@@ -1,0 +1,46 @@
+{"checkpoint": [
+      {
+        "checkpoint_iter": 1,
+        "description": "This checkpoint ensures the agent identifies and verifies at least 1 reliable data source that aligns with the specified source types. Given the LOW complexity, the agent focuses on essential validation of source reliability and official status.",
+        "review_criteria": [
+          "At least 1 source identified.",
+          "Source meets reliability criteria (official status, update frequency, present data methodology)."
+        ]
+      },
+      {
+        "checkpoint_iter": 2,
+        "description": "This checkpoint ensures the agent successfully retrieves data from the identified source, monitoring for data freshness (real-time to 1 hour old) and completeness (current temperature, location accuracy, last updated timestamp, data source credentials). The LOW complexity allows for basic validation of data completeness.",
+        "review_criteria": [
+          "Data retrieved from the source.",
+          "Data set includes all required data points.",
+          "Data is within the freshness threshold (real-time to 1 hour old)."
+        ]
+      },
+      {
+        "checkpoint_iter": 3,
+        "description": "This checkpoint ensures the agent cross-references the retrieved data from at least 1 source to validate consistency and accuracy. The LOW complexity requires basic cross-reference checks.",
+        "review_criteria": [
+          "Temperature values from the source are consistent within a reasonable margin.",
+          "Cross-reference count meets the requirement (1 source)."
+        ]
+      },
+      {
+        "checkpoint_iter": 4,
+        "description": "This checkpoint ensures the final data set meets all validation requirements, including information recency, cross-reference count, and source reliability. The LOW complexity allows for basic final validation.",
+        "review_criteria": [
+          "Final data set includes all required data points.",
+          "Data is within the freshness threshold.",
+          "Cross-reference count meets the requirement.",
+          "Source meets reliability criteria."
+        ]
+      },
+      {
+        "checkpoint_iter": 5,
+        "description": "This checkpoint ensures the agent successfully completes the task and outputs the final data set. The LOW complexity requires basic confirmation of task completion.",
+        "review_criteria": [
+          "Final data set outputted.",
+          "Task completion logged."
+        ]
+      }
+    ]
+}
