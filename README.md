@@ -1,5 +1,6 @@
 # Agent Prime Framework
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FViternas%2Fproject-friday&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+
 Agent Prime is a comprehensive, enterprise-grade framework for building intelligent agent systems with robust memory management, specialized agent capabilities, and advanced state tracking.
 
 ## 🚀 Features
