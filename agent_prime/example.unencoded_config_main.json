@@ -1,0 +1,31 @@
+{
+    "database": {
+        "encoded": true,
+        "database": "example",
+        "user": "example",
+        "password": "",
+        "host": "127.0.0.1",
+        "port": "5432",
+        "max_connection": 20,
+        "min_connection": 1
+    },
+    "secrets": {
+        "encoded": true,
+        "fernet_key": "example",
+        "salt_key": "example",
+        "conn": "example"
+    },
+    "ai_keys": {
+        "encoded": true,
+        "OpenAi_key": "example",
+        "OpenRouter_Key": "example",
+        "Ollama_Key": "example"
+    },
+    "orchestration_engine": {
+        "encoded": true,
+        "host": "127.0.0.1",
+        "port": "5000",
+        "api_key": "example"
+    }
+
+}
