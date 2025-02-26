@@ -60,12 +60,255 @@ cc = CreateConfigClass(
     config_file_name='config_main_encoded.json'
 ).create_config_class()
 ```
+Example Agent Implementation Guide 
+
+This guide demonstrates how to create an agent in the Agent Prime system using the provided ExampleAgent as reference. 
+Agent Structure Overview 
+
+The ExampleAgent follows a structured pattern: 
+python
+ 
+ 
+1
+2
+3
+4
+5
+6
+⌄
+⌄
+⌄
+def create_example_agent():
+    class ExampleAgent:
+        def __init__(self, data=None):
+            self.agent = data
+        # Methods...
+    return ExampleAgent
+ 
+ 
+Key Components 
+1. Function Mapping 
+
+Agents provide function maps to expose available operations: 
+python
+ 
+ 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+⌄
+⌄
+⌄
+⌄
+def _map_function(self):
+    return {
+        'EXAMPLE_FUNCTION': self.example_function,
+    }
+
+@staticmethod
+def _map_arguments():
+    return {
+        'EXAMPLE_FUNCTION': 'example_function_basemodel',
+    }
+ 
+ 
+2. Function Execution 
+
+The _run_function method handles executing mapped functions: 
+python
+ 
+ 
+1
+2
+⌄
+def _run_function(self, handler, args_dict, context):
+    return handler(**args_dict)
+ 
+ 
+3. Memory-Augmented Functions 
+
+Functions use decorators for memory tracking and normalization: 
+python
+ 
+ 
+1
+2
+3
+4
+5
+⌄
+@self.agent.memory.add_to_memory_decorator()
+@self.agent.memory.function_normalizer.normalize()
+@self.agent.memory.function_type_label(FunctionType.DATA_PROCESSING.value)
+def _example_function_processing(*args, **kwargs):
+    return 5
+ 
+ 
+
+These decorators: 
+
+     Add function execution to agent memory
+     Normalize function output for consistent handling
+     Label the function with its type (REASONING, DATA_PROCESSING, etc.)
+     
+
+4. Function Types 
+
+Functions can be categorized with FunctionType enum: 
+
+     REASONING: For logic and reasoning operations
+     DATA_PROCESSING: For data manipulation operations
+     PROCESSED_DATA: For operations producing final data
+     
+
+5. Multi-Step Processing 
+
+Complex operations can be split into multiple steps: 
+python
+ 
+ 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+⌄
+⌄
+⌄
+⌄
+def example_function(self, checkpoint_uuid, step_uuid, previous_step_uuid, function_arguments):
+    # Step 1: Processing
+    @decorators...
+    def _example_function_processing(*args, **kwargs):
+        return 5
+        
+    # Step 2: Thinking
+    @decorators...
+    def _example_function_thinking(*args, **kwargs):
+        return 50
+        
+    # Execution function
+    def _run_test_function(*args, **kwargs):
+        # Execute step 1
+        _example_function_processing(...)
+        
+        # Execute step 2 with new step_uuid
+        _example_function_thinking(
+            checkpoint_uuid=checkpoint_uuid,
+            step_uuid=str(uuid4()),  # New UUID for this step
+            previous_step_uuid=step_uuid,  # Link to previous step
+            function_arguments=function_arguments
+        )
+ 
+ 
+Core Agent Functions 
+Single Function Call 
+
+Handles executing single function calls: 
+python
+ 
+ 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+⌄
+⌄
+def single_function_call(self, checkpoint_uuid, step_uuid, previous_step_uuid, function_arguments):
+    @decorators...
+    def _single_function_call(*args, **kwargs):
+        # Get parameters from function_arguments
+        self.agent.thinking.task = function_arguments.get('checkpoint')
+        previous_function = function_arguments.get('previous_function')
+        previous_function_output = function_arguments.get('previous_function_output')
+        task = function_arguments.get('task')
+        
+        # Execute thinking function and capture result and cost
+        single_function_call, cost = self.agent.thinking.single_function_call(
+            replacement_items=[previous_function, previous_function_output, task]
+        )
+        return single_function_call, cost
+ 
+ 
+Arguments Builder 
+
+Prepares arguments for function execution: 
+python
+ 
+ 
+1
+2
+3
+4
+5
+6
+7
+8
+⌄
+⌄
+def arguments_for_single_function_call(self, checkpoint_uuid, step_uuid, previous_step_uuid, function_arguments):
+    @decorators...
+    def _arguments_for_single_function_call(*args, **kwargs):
+        # Similar to single_function_call but for argument preparation
+        map_to_args, cost = self.agent.thinking.arguments_for_single_function_call(
+            replacement_items=[previous_function, previous_function_output, task]
+        )
+        return map_to_args, cost
+ 
+ 
+Creating Your Own Agent 
+
+     Create a function that returns your agent class
+     Implement required methods: run(), _map_function(), _map_arguments(), _run_function()
+     Add your specialized functions with proper decorators
+     Register your agent in the agent registry
+     Call it through Agent Prime
+     
+
+Each agent operation should be tracked with memory decorators to build the knowledge graph and maintain execution history. 
+
 
 ## 🚀 Quick Start
 
 ```python
 from agent_prime.agent_prime import AgentPrime
 
+```
 # Initialize the agent system
 agent = AgentPrime()
 agent.initialise_class_runtimes()
