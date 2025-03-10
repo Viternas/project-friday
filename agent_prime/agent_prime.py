@@ -190,15 +190,20 @@ class AgentPrime:
 
         agent_class = map_agent('EXAMPLE')
         handler = agent_class()(self)
-        handler.example_function(checkpoint_uuid=checkpoint_uuid[0], step_uuid=str(uuid4()),
-                              previous_step_uuid=checkpoint_uuid[0], function_arguments={})
+        for i in range(5):
+            handler.example_function(checkpoint_uuid=checkpoint_uuid[i], step_uuid=str(uuid4()),
+                                  previous_step_uuid=checkpoint_uuid[i], function_arguments={})
+
         self.memory.graph_memory.visualise_plt()
 
-
     def test(self):
-        self.AI.model = Models.LLAMA3_1_8B.model_id
-        response, cost = self.AI.ollama_chat(prompt='farts violently')
-        print(response)
+        self.thinking.task = 'Research the website https://www.project-friday.com, look at everything they have released; I want to know if they have a git hub, funding, team size'
+        test, cost = self.thinking.clarify_task(replacement_items=[''])
+        print(test)
+        exit()
+        complexity, cost = self.thinking.evaluate_task_complexity(replacement_items=[self.thinking.task])
+        checkpoint, cost = self.thinking.build_web_checkpoint(replacement_items=[complexity.value])
+        print(checkpoint)
 
 
 
@@ -206,5 +211,5 @@ if __name__ =='__main__':
     #logger.remove()
     run = AgentPrime()
     run.run()
-    run.run_example_agent()
+    run.test()
 

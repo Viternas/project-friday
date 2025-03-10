@@ -213,6 +213,7 @@ class FunctionOutputNormalizer:
                         iteration_count=cls._get_iteration_count(output),
                         args_provided={'args': args, 'kwargs': kwargs}
                     )
+                    print(function_execution_output)
                     def _get_reasoning():
                         function_execution_output.reasoning = output.action_type_reason
 

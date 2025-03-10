@@ -1,0 +1,55 @@
+Generate a comprehensive list of checkpoints for the agent to implement during its execution. These checkpoints must ensure the agent’s actions align with the specified purpose, adhere to the provided execution parameters, and meet validation requirements. The checkpoints should also monitor data integrity, dynamically handle potential errors, and recover gracefully from failure modes. The checkpoints must directly correspond to each step in the task execution process.
+
+**IMPORTANT NOTE:**
+The agent:
+- Has a stable internet connection.
+- Has access to all required tools for its execution.
+- Is fully initialized and ready to execute.
+- Does not have preexisting knowledge of any data sources.
+- Has been assigned a **Task Complexity** level of: **{TASK_COMPLEXITY}** (low, medium, or high).
+
+**Requirements for Each Checkpoint:**
+
+1.  **Checkpoint Name**: A clear and descriptive title.
+2.  **Description**: Why this checkpoint is critical, how it relates to the tool, purpose, execution parameters, and validation requirements *and* how the **[TASK_COMPLEXITY]** level influences its necessity and intensity.
+3.  **Implementation Details**: How the checkpoint is integrated into the agent’s workflow (e.g., at which step in the process it is triggered and what logic or conditions it evaluates). The **[TASK_COMPLEXITY]** should influence the complexity of the logic.
+4.  **Success Criteria**: Conditions for passing the checkpoint (e.g., valid data structure, acceptable response time, accurate data).  The **[TASK_COMPLEXITY]** should influence the strictness of these criteria (e.g. a 'low' complexity might only require 1 source, where a 'high' may require 3).
+5.  **Potential Failure Modes**: Common reasons why the checkpoint might fail (e.g., unexpected API response, missing or malformed data).  The **[TASK_COMPLEXITY]** can also lead to more failure modes in higher complexity tasks.
+6.  **Recovery Actions**: Steps the agent should take to resolve failure modes (e.g., retrying, adjusting parameters, logging, or aborting gracefully). The **[TASK_COMPLEXITY]** should influence the complexity of the recovery steps taken.
+
+**Guidance:**
+
+- Create checkpoints in logical sequence aligned with a typical web automation lifecycle:
+    -   **Data Identification**: Locate and verify target data sources.
+    -   **Data Retrieval**: Extract data while monitoring quality and process integrity.
+    -   **Validation**: Ensure retrieved data meets format and accuracy requirements.
+    -   **Execution**: Process or manipulate data as needed to achieve the goal.
+    -   **Final Confirmation**: Verify the final output against the goal.
+
+-   Ensure checkpoints tie back to the task’s defined parameters (tool, purpose, execution parameters, and validation requirements).
+-   Address both data quality (correctness, consistency, and completeness) and error handling (e.g., resolving unavailable resources or malformed inputs).
+-   Use references to `[GOAL]`, `[VAR_NAME]`, and `[REQ_NAME]` wherever applicable to contextualize each checkpoint.
+-   **Adjust Checkpoint Rigor:** Base the strictness and intensity of your checkpoints on the **[TASK_COMPLEXITY]** level:
+    -   **Low Complexity:** Checkpoints can be more basic and focus on essential validations, less intensive error recovery, less iterations
+    -   **Medium Complexity:** Checkpoints should be more rigorous, with more in-depth validation checks, more potential failure modes, and comprehensive error handling.
+    -   **High Complexity:** Checkpoints should be extremely robust, with extensive validation criteria, thorough error logging, multiple and sophisticated error recovery attempts.
+
+**Output Format:**
+
+### Checkpoint [X]: [Checkpoint Name]
+**Description:**
+[Why this checkpoint exists and how it’s implemented]
+
+**Implementation Details:**
+[Steps for integrating this checkpoint into the workflow]
+
+**Success Criteria:**
+[Conditions for passing the checkpoint]
+
+**Potential Failure Modes:**
+[Reasons why this checkpoint might fail]
+
+**Recovery Actions:**
+[Steps to handle each failure mode]
+
+After generating the full list of checkpoints, ensure the document flows as a cohesive, step-by-step guide.
