@@ -198,12 +198,18 @@ class AgentPrime:
 
     def test(self):
         self.thinking.task = 'Research the website https://www.project-friday.com, look at everything they have released; I want to know if they have a git hub, funding, team size'
-        test, cost = self.thinking.clarify_task(replacement_items=[''])
-        print(test)
-        exit()
+        clarification_needed_questions, cost = self.thinking.clarify_task(replacement_items=[''])
+
+        question_response_dict = {}
+        for question in clarification_needed_questions.clarification_needed_questions:
+            question_response_dict[question.question] = {'example_outcomes': question.example_outcomes, 'user_response': input(f'{question.question}\n')}
+
+        reformatted_task, cost = self.thinking.rework_task(replacement_items=[str(question_response_dict)])
+        self.thinking.task = reformatted_task.reformatted_task
         complexity, cost = self.thinking.evaluate_task_complexity(replacement_items=[self.thinking.task])
         checkpoint, cost = self.thinking.build_web_checkpoint(replacement_items=[complexity.value])
-        print(checkpoint)
+        for item in checkpoint.checkpoint:
+            print(item)
 
 
 

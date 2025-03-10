@@ -14,3 +14,4 @@ The refined task should be structured as follows:
 
 
 Rebuild the prompt based on the following user responses:
+{USER_RESPONSES}

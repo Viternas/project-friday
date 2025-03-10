@@ -56,11 +56,11 @@ class TaskMaster:
         cost.append(self.extract_cost_items(usage=usage, model=self.ai_client.model))
         return prompt_clarification, cost
 
-    def rework_task(self):
+    def rework_task(self, replacement_items):
         logger.info(f'Reworking task')
         cost = []
-        self.ai_client.model = Models.GPT_4O.value
-        self.set_prompt(PromptEnum=Prompt.REWORK_PROMPT, replacement_items=[''])
+        self.ai_client.model = Models.GPT_4O.model_id
+        self.set_prompt(PromptEnum=Prompt.REWORK_PROMPT, replacement_items=replacement_items)
         self.ai_client.parser = ClarifiedSystemPrompt
         prompt_clarification, usage = self.ai_client.gpt_parse(prompt=self.task)
         cost.append(self.extract_cost_items(usage=usage, model=self.ai_client.model))
